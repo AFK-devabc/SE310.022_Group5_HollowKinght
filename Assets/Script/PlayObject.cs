@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class PlayObject : BaseObject
 {
-    [SerializeField] public float currentHP;
-    [SerializeField] public float MaxHP;
+    [SerializeField] protected float currentHP;
+    [SerializeField] protected float MaxHP;
     [SerializeField] public bool isAttack;
 
     protected override void Start()
@@ -31,7 +31,7 @@ public class PlayObject : BaseObject
     {
         currentHP -= damage;
 
-        if (currentHP <= 0)
+        if(currentHP <= 0 )
         {
             Dead();
         }
@@ -39,7 +39,6 @@ public class PlayObject : BaseObject
 
     public override void Dead()
     {
-        base.Dead();
         this.isDead = true;
     }
 }
