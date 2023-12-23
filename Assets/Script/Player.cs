@@ -13,6 +13,7 @@ public class Player : PlayObject
     private float jumpForce;
     float timeLand = 0.2f;
     float timeLandStart = 0f;
+    public float maxSpeedY;
 
     [Header("----------Attack----------")]
     [SerializeField] private int combo;
@@ -20,7 +21,7 @@ public class Player : PlayObject
     [SerializeField] private slashEffect slash;
 
     [Header("----------Take Damage----------")]
-    [SerializeField] private bool isUndying;
+    [SerializeField] public bool isUndying;
     [SerializeField] private float timeUndying;
     private float timeStartUndying;
     [SerializeField] private BoxCollider2D colider; 
@@ -50,7 +51,12 @@ public class Player : PlayObject
     private void FixedUpdate()
     {
         if(isDead) return;
-        if(isMove) 
+        if (Mathf.Abs(rb.velocity.y) > maxSpeedY && rb.velocity.y < 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, -maxSpeedY);
+        }
+        
+        if (isMove) 
             Move();
     }
 
@@ -65,8 +71,6 @@ public class Player : PlayObject
         {
             if (timeStartUndying > timeUndying)
             {
-                colider.enabled = true;
-
                 isUndying = false;
                 timeStartUndying = 0f;
                 colider.enabled = true;
@@ -96,7 +100,8 @@ public class Player : PlayObject
         switch (state)
         {
             case (int)STATE_PLAYER.MoveLeft:
-                isWall = Physics2D.BoxCast(colider.bounds.center, colider.bounds.size, 0f, Vector2.left, .1f, layerMask);
+                isWall = Physics2D.BoxCast(colider.bounds.center, colider.bounds.size - new Vector3(0.1f,0f, 0f), 0f, Vector2.left, .2f, layerMask);
+                Debug.Log(isWall);
                 temp.x = isWall == true? 0: -1;
                 velocity = temp;
                 isRight = false;
@@ -105,7 +110,8 @@ public class Player : PlayObject
                 else return;
                 break;
             case (int)STATE_PLAYER.MoveRight:
-                isWall = Physics2D.BoxCast(colider.bounds.center, colider.bounds.size, 0f, Vector2.right, .1f, layerMask);
+                isWall = Physics2D.BoxCast(colider.bounds.center, colider.bounds.size - new Vector3(0.1f, 0f, 0f), 0f, Vector2.right, .2f, layerMask);
+                Debug.Log(isWall);
                 temp.x = isWall == true ? 0 : 1;
                 velocity = temp;
                 isRight = true;
@@ -136,7 +142,7 @@ public class Player : PlayObject
                 break;
             case (int)STATE_PLAYER.Die:
                 isMove = false;
-                atacando = true;
+                endCombo();
                 ani.Play("player_DEADTH");
                 rb.gravityScale = 0f;
                 SoundManager.getInstance().PlaySFXPlayer("knight_die");
@@ -149,7 +155,7 @@ public class Player : PlayObject
                 break;
             case (int)STATE_PLAYER.Focus:
                 isMove = false;
-                atacando = true;
+                endCombo();
                 ani.Play("player_FOCUS_START");
                 break;
             case (int)STATE_PLAYER.EndFocus:
@@ -179,11 +185,16 @@ public class Player : PlayObject
 
     public void FinishAni()
     {
-        atacando = true;
-        combo = 0;
+        endCombo();
 
         ani.Play("player_IDLE");
         setState((int)STATE_PLAYER.IDLE);
+    }
+
+    public void endCombo()
+    {
+        atacando = true;
+        combo = 0;
     }
 
     public void startCombo()
@@ -218,7 +229,7 @@ public class Player : PlayObject
 
         if(isDead == false)
         {
-            atacando = true;
+            endCombo();
             ani.Play("player_TAKE_DAMAGE");
 
             isUndying = true;
