@@ -12,8 +12,6 @@ public class NPCTalkDialog : MonoBehaviour
     [SerializeField] protected float wordSpeed;
     protected int index = 0;
     protected bool PlayerIsInRange = false;
-    Coroutine TypingCoroutine;
-    bool CoroutineIsRunning;
 
     [SerializeField] BaseObject NPCObject;
 
@@ -33,54 +31,21 @@ public class NPCTalkDialog : MonoBehaviour
                 NPCObject.setState((int)GameConstant.NPC_STATE_TALK);
 
                 dialogText.text = "";
-                TypingCoroutine = StartCoroutine(Typing());
-                index+=1;
+                StartCoroutine(Typing());
+                index++;
             }
         }
     }
 
     public void NextLine()
     {
-        //if(index < dialogTexts.Length)
-        //{
-        //    if(CoroutineIsRunning == false)
-        //    {
-        //        dialogText.text = "";
-        //        StopCoroutine(TypingCoroutine);
-        //        TypingCoroutine = StartCoroutine(Typing());
-        //        index += 1;
-        //    }
-        //    else
-        //    {
-        //        dialogText.text = dialogTexts[index-1];
-        //        StopCoroutine(TypingCoroutine);
-        //        CoroutineIsRunning = false;
-        //    }
-        //}
-        //else ZeroText();
-
-        if(CoroutineIsRunning == false)
+        if(index < dialogTexts.Length)
         {
-            if (index < dialogTexts.Length)
-            {
-                dialogText.text = "";
-                StopCoroutine(TypingCoroutine);
-                TypingCoroutine = StartCoroutine(Typing());
-                index += 1;
-            }
-            else ZeroText();
+            dialogText.text = "";
+            StartCoroutine(Typing());
+            index++;
         }
-        else
-        {
-            dialogText.text = dialogTexts[index - 1];
-            StopCoroutine(TypingCoroutine);
-            CoroutineIsRunning = false;
-        }
-    }
-
-    public void EndLine()
-    {
-
+        else ZeroText();
     }
 
     public void ZeroText()
@@ -94,13 +59,11 @@ public class NPCTalkDialog : MonoBehaviour
 
     IEnumerator Typing ()
     {
-        CoroutineIsRunning = true;
         foreach (char letter in dialogTexts[index].ToCharArray())
         {
             dialogText.text += letter; 
             yield return new WaitForSeconds(wordSpeed);
         }
-        CoroutineIsRunning = false;
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)
