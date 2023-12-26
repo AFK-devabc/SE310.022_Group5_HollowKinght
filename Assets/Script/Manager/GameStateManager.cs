@@ -29,7 +29,7 @@ public class GameStateManager : MonoBehaviour
 
     private void Start()
     {
-
+        addSubcriberDontDestroy();
     }
 
     private void Update()
@@ -63,7 +63,6 @@ public class GameStateManager : MonoBehaviour
                 case Game_State.BacktoMenu:
                     publisherGameDontDestroyState.notify((int)state);
                     SceneManager.LoadScene(0);
-                    Destroy(this.gameObject);
                     break;
             }
             this.state = state;
@@ -73,7 +72,7 @@ public class GameStateManager : MonoBehaviour
 
 public class Publisher
 {
-    public List<Subcriber> subcribers = new List<Subcriber> ();
+    List<Subcriber> subcribers = new List<Subcriber> ();
 
     public void subcribe(Subcriber subcriber)
     {

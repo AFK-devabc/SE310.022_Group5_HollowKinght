@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class shockWave : BaseObject
+public class shockWave : Bullet
 {
     public float acceleration;
     public float MaxSpeed;
@@ -10,11 +10,16 @@ public class shockWave : BaseObject
     protected override void Start()
     {
         base.Start();
-        if(isRight)
+        if (isRight)
         {
             acceleration = Mathf.Abs(acceleration);
+            Speed = Mathf.Abs(Speed);
         }
-        else acceleration = -Mathf.Abs(acceleration);
+        else
+        {
+            acceleration = -Mathf.Abs(acceleration);
+            Speed = -Mathf.Abs(Speed);
+        }
 
         flip();
     }

@@ -36,16 +36,15 @@ public class CameraFollow : MonoBehaviour
 
             Instantiate(playerControlFrefabs, Vector3.zero, Quaternion.identity);
             Instantiate(uIManagerFrefabs, Vector3.zero, Quaternion.identity);
-            Instantiate(soundManagerFrefabs, Vector3.zero, Quaternion.identity);
             Instantiate(sceneLoaderFrefabs, Vector3.zero, Quaternion.identity);
 
-            SoundManager.getInstance().PlayMusic("AbyssMusic01");
+            GameStateManager.getInstance().addSubcriberDontDestroy();
         }
         else
         {
             target = player.transform;
         }
-
+        SoundManager.getInstance().PlayMusic("AbyssMusic01");
         MinimapManager.getInstance().setPlayer(player);
     }
 

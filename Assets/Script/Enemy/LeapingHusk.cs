@@ -29,6 +29,7 @@ public class LeapingHusk : Enemy
 
     public override void setState(int state)
     {
+        if(isDead) return;
         Vector3 temp = velocity;
         if (isDead)  return; 
         switch (state)
@@ -55,6 +56,7 @@ public class LeapingHusk : Enemy
                 isAttack = true;
                 break;
             case (int)STATE_LEAPINGHUSK.Die:
+                isDead = true;
                 ani.Play("LeapingHusk_DEAD_IN_AIR");
                 collision.SetActive(false);
                 this.transform.Find("BoxCollisionMoving").GetComponent<BoxCollider2D>().size = new Vector2(1, 0.8f);

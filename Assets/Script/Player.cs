@@ -236,6 +236,7 @@ public class Player : PlayObject
             flashEffect.startFlash();
 
             effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+            SoundManager.getInstance().PlaySFXPlayer("knight_takeDamage");
             Destroy(effect, 1f);
         }
         else
@@ -299,6 +300,15 @@ public class Player : PlayObject
             HUDManager.getInstance().upSoul();
             HUDManager.getInstance().healthDown(1);
         }
+    }
+
+    public override void update(int state)
+    {
+        if(state == (int)Game_State.BacktoMenu)
+        {
+            Destroy(this.gameObject);
+        }
+        else base.update(state);
     }
 } 
 
