@@ -13,7 +13,6 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] Player playerFrefabs;
     [SerializeField] PlayerControl playerControlFrefabs;
     [SerializeField] UIManager uIManagerFrefabs;
-    [SerializeField] SoundManager soundManagerFrefabs;
     [SerializeField] SceneLoader sceneLoaderFrefabs;
 
     [Header("----------Viewport Size----------")]
