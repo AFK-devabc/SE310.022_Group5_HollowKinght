@@ -11,7 +11,6 @@ public class CameraFollow : MonoBehaviour
     // start Scene
     [Header("----------Start scene----------")]
     [SerializeField] Player playerFrefabs;
-    [SerializeField] Vector3 playerPosStart;
     [SerializeField] PlayerControl playerControlFrefabs;
     [SerializeField] UIManager uIManagerFrefabs;
     [SerializeField] SoundManager soundManagerFrefabs;
@@ -27,21 +26,28 @@ public class CameraFollow : MonoBehaviour
     }
     void Start()
     {
+        if (target != null) return;
         Player player = GameObject.FindObjectOfType<Player>();
         if (player == null)
         {
-            player = Instantiate(playerFrefabs, playerPosStart, Quaternion.identity);
+            Vector3 pos = transform.position;
+            pos.z = -0.01f;
+            player = Instantiate(playerFrefabs, pos, Quaternion.identity);
             target = player.transform;
 
             Instantiate(playerControlFrefabs, Vector3.zero, Quaternion.identity);
             Instantiate(uIManagerFrefabs, Vector3.zero, Quaternion.identity);
             Instantiate(soundManagerFrefabs, Vector3.zero, Quaternion.identity);
             Instantiate(sceneLoaderFrefabs, Vector3.zero, Quaternion.identity);
+
+            SoundManager.getInstance().PlayMusic("AbyssMusic01");
         }
         else
         {
             target = player.transform;
         }
+
+        MinimapManager.getInstance().setPlayer(player);
     }
 
     // Update is called once per frame
