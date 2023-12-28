@@ -34,6 +34,7 @@ public class TownBench : MonoBehaviour
                     SoundManager.getInstance().PlaySFXPlayer("Bench_rest");
                     Vector3 temp = transform.position;
                     temp.y = player.transform.position.y;
+
                     // save data
                     SaveLoadSystem.SavePlayerData(temp, SceneManager.GetActiveScene().buildIndex);
                     SaveLoadSystem.SaveHUDData(HUDManager.getInstance());
