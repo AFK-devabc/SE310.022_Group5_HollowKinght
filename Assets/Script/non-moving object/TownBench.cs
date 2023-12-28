@@ -36,10 +36,11 @@ public class TownBench : MonoBehaviour
                     temp.y = player.transform.position.y;
 
                     // save data
+                   SaveLoadSystem.saveAllData();
+                    
                     SaveLoadSystem.SavePlayerData(temp, SceneManager.GetActiveScene().buildIndex);
                     SaveLoadSystem.SaveHUDData(HUDManager.getInstance());
                     SaveLoadSystem.SaveSettingData(SoundManager.getInstance().getVolumeSFX(), SoundManager.getInstance().getVolumeMusic());
-
                     player.setState((int)STATE_PLAYER.Sit);
                     talkUI.SetActive(false);
                 }
