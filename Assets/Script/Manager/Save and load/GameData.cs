@@ -42,7 +42,10 @@ public class HollowShadeData
     public float[] position;
     public int sceneNumber = -1;
 
-    public HollowShadeData(Vector3 position, int sceneNumber)
+    public int coin;
+    public int soul;
+
+    public HollowShadeData(Vector3 position, int sceneNumber, HUDManager manager)
     {
         this.position = new float[3];
         this.position[0] = position.x;
@@ -50,18 +53,35 @@ public class HollowShadeData
         this.position[2] = -0.01f;
 
         this.sceneNumber = sceneNumber;
+
+        coin = manager.coin;
+        soul = manager.soul;
     }
 }
 
 [System.Serializable]
-public class SettingData
+public class SoundSettingData
 {
+    // setting sound
     public int volumeSFX;
     public int volumeMusic;
 
-    public SettingData(int volumeSFX, int volumeMusic)
+    public SoundSettingData(int volumeSFX, int volumeMusic)
     {
         this.volumeSFX = volumeSFX;
         this.volumeMusic = volumeMusic;
+    }
+}
+
+[System.Serializable]
+public class GameSettingData
+{
+    public int WidthScreen;
+    public int HeightScreen;
+
+    public GameSettingData(Resolution resolution)
+    {
+        this.WidthScreen = resolution.width;
+        this.HeightScreen = resolution.height;
     }
 }
