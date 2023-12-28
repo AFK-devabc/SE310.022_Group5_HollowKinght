@@ -44,7 +44,8 @@ public class MapConfig : ScriptableObject
 
     public List<markerInArea> GetMarkerInArea(int idAreea)
     {
-return areaConfigs.Find(x=>x.ID ==idAreea).getMarkers();    }
+        return areaConfigs.Find(x=>x.ID ==idAreea).getMarkers();
+    }
 
     public bool AreaIsHaveScene( int idArea, int idScene)
     {

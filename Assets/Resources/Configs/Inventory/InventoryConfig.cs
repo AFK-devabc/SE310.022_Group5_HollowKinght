@@ -38,21 +38,24 @@ public class InventoryConfig : MonoBehaviour
     {
         if (instance == null)
         {
-instance = GameObject.FindObjectOfType<InventoryConfig>();        }
+            instance = GameObject.FindObjectOfType<InventoryConfig>();
+        }
         return instance;
     }
-      private void Awake()
+
+    private void Awake()
     {
         instance = this;
     }
+
     [Header("--------------ITEM EQUIPMENT--------------")]
-       [SerializeField] public int MaskSharp_ID = -1;
+    [SerializeField] public int MaskSharp_ID = -1;
     [SerializeField] public int DreamNail_ID = -1;
     [SerializeField] public int Nail_ID = -1;
     [SerializeField] public int Spell_ID = -1;
 
     [Header("--------------ITEM SHOP--------------")]
-   [SerializeField] List<int> listInventoryItemShop = new List<int>();
+    [SerializeField] List<int> listInventoryItemShop = new List<int>();
 
     private void Start()
     {
@@ -77,6 +80,7 @@ instance = GameObject.FindObjectOfType<InventoryConfig>();        }
             }
         }
     }
+
     public List<int> getInventoryItemShops()
     {
         return listInventoryItemShop;

@@ -30,7 +30,7 @@ public class MiniMapControler : MonoBehaviour
     protected virtual void Start()
     {
         player = GameObject.FindObjectOfType<Player>();
-               idMarkerplayer = playerMarkerTranform.GetComponent<Marker>().ID;
+        idMarkerplayer = playerMarkerTranform.GetComponent<Marker>().ID;
         if (MapConfig.getInstance().GetAreaConfig(ID).isUnlock == false)
         {
             minimapManager.isNoMap = true;
@@ -41,7 +41,7 @@ public class MiniMapControler : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-          MarkerConfig config = MarkerConfigs.getInstance().getConfig(idMarkerplayer);
+        MarkerConfig config = MarkerConfigs.getInstance().getConfig(idMarkerplayer);
         if (InventoryConfig.getInstance().IsInInventory(config.IDItemNeed))
         {
             playerMarkerTranform.gameObject.SetActive(true);
@@ -49,14 +49,13 @@ public class MiniMapControler : MonoBehaviour
                 originRTranform.InverseTransformPoint(player.transform.position),
                 endRTranform.position - originRTranform.position
             );
-         mapped = Multiply(normalized, endMTranform.localPosition);
+            mapped = Multiply(normalized, endMTranform.localPosition);
             playerMarkerTranform.localPosition = mapped;
         }
         else
         {
             playerMarkerTranform.gameObject.SetActive(false);
         }
-        playerMarkerTranform.localPosition = mapped;
     }
 
     public Vector3 Divide(Vector3 a, Vector3 b)
