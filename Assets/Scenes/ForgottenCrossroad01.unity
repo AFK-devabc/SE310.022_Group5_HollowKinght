@@ -49633,15 +49633,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4096841908618266798, guid: 5319bc76494ff9742ad08b24090d9db8, type: 3}
       propertyPath: posPlayer.x
-      value: -27.2
+      value: 85.96
       objectReference: {fileID: 0}
     - target: {fileID: 4096841908618266798, guid: 5319bc76494ff9742ad08b24090d9db8, type: 3}
       propertyPath: posPlayer.y
-      value: 59.14
+      value: 58.6
       objectReference: {fileID: 0}
     - target: {fileID: 4096841908618266798, guid: 5319bc76494ff9742ad08b24090d9db8, type: 3}
       propertyPath: sceneNumber
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4096841908618266800, guid: 5319bc76494ff9742ad08b24090d9db8, type: 3}
       propertyPath: m_Name

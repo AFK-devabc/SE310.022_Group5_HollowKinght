@@ -23,7 +23,7 @@ MonoBehaviour:
       tr\xEAn b\u1EA3n \u0111\u1ED3 c\u1EE7a b\u1EA1n. C\u1EF1c k\u1EF3 h\u1EEFu
       \xEDch cho vi\u1EC7c t\xECm ph\u01B0\u01A1ng h\u01B0\u1EDBng c\u1EE7a b\u1EA1n
       \u1EDF nh\u1EEFng \u0111\u1ECBa \u0111i\u1EC3m kh\xF4ng quen thu\u1ED9c!"
-    geoCount: 220
+    geoCount: 0
   - ID: 1
     Name: Quill
     img: {fileID: 21300000, guid: d3b91d25dc2951344a49035921b2a7fe, type: 3}
